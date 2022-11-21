@@ -1,0 +1,723 @@
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"untitled01.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.SendData,"ax",%progbits
+  20              		.align	2
+  21              		.global	SendData
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	SendData, %function
+  25              	SendData:
+  26              	.LFB64:
+  27              		.file 1 "untitled01.c"
+   1:untitled01.c  **** /* ========================================
+   2:untitled01.c  ****  *
+   3:untitled01.c  ****  * Copyright YOUR COMPANY, THE YEAR
+   4:untitled01.c  ****  * All Rights Reserved
+   5:untitled01.c  ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:untitled01.c  ****  *
+   7:untitled01.c  ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:untitled01.c  ****  * WHICH IS THE PROPERTY OF your company.
+   9:untitled01.c  ****  *
+  10:untitled01.c  ****  * ========================================
+  11:untitled01.c  **** */
+  12:untitled01.c  **** #include "project.h"
+  13:untitled01.c  **** #include "stdio.h"
+  14:untitled01.c  **** #include "interrupt_routine.h"
+  15:untitled01.c  **** 
+  16:untitled01.c  **** 
+  17:untitled01.c  **** void SendData(){
+  28              		.loc 1 17 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  18:untitled01.c  ****         if(PacketReadyFlag==1){
+  36              		.loc 1 18 0
+  37 0002 064B     		ldr	r3, .L4
+  38 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  39 0006 DBB2     		uxtb	r3, r3
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 2
+
+
+  40 0008 012B     		cmp	r3, #1
+  41 000a 05D1     		bne	.L1
+  19:untitled01.c  ****         //instert function for usb module
+  20:untitled01.c  ****         // UART_BlueT_PutString("PacketreadyFlag=1\r\n");
+  21:untitled01.c  ****         UART_BlueT_PutString(DataBuffer);
+  42              		.loc 1 21 0
+  43 000c 0448     		ldr	r0, .L4+4
+  44 000e FFF7FEFF 		bl	UART_BlueT_PutString
+  45              	.LVL0:
+  22:untitled01.c  ****         //reset the value Packet read to 0 
+  23:untitled01.c  ****         PacketReadyFlag=0;
+  46              		.loc 1 23 0
+  47 0012 0022     		movs	r2, #0
+  48 0014 014B     		ldr	r3, .L4
+  49 0016 1A70     		strb	r2, [r3]
+  50              	.L1:
+  51 0018 08BD     		pop	{r3, pc}
+  52              	.L5:
+  53 001a 00BF     		.align	2
+  54              	.L4:
+  55 001c 00000000 		.word	PacketReadyFlag
+  56 0020 00000000 		.word	DataBuffer
+  57              		.cfi_endproc
+  58              	.LFE64:
+  59              		.size	SendData, .-SendData
+  60              		.section	.text.CheckRX,"ax",%progbits
+  61              		.align	2
+  62              		.global	CheckRX
+  63              		.thumb
+  64              		.thumb_func
+  65              		.type	CheckRX, %function
+  66              	CheckRX:
+  67              	.LFB65:
+  24:untitled01.c  ****         }
+  25:untitled01.c  ****     }
+  26:untitled01.c  **** //functions to check Rx Register(useful for the application control)
+  27:untitled01.c  **** 
+  28:untitled01.c  **** void CheckRX(){
+  68              		.loc 1 28 0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 0
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72 0000 08B5     		push	{r3, lr}
+  73              		.cfi_def_cfa_offset 8
+  74              		.cfi_offset 3, -8
+  75              		.cfi_offset 14, -4
+  29:untitled01.c  ****     
+  30:untitled01.c  ****     if(UART_BlueT_GetByte()){
+  76              		.loc 1 30 0
+  77 0002 FFF7FEFF 		bl	UART_BlueT_GetByte
+  78              	.LVL1:
+  79 0006 10B1     		cbz	r0, .L6
+  31:untitled01.c  ****         RxFlag_Start=1;
+  80              		.loc 1 31 0
+  81 0008 0122     		movs	r2, #1
+  82 000a 014B     		ldr	r3, .L9
+  83 000c 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 3
+
+
+  84              	.L6:
+  85 000e 08BD     		pop	{r3, pc}
+  86              	.L10:
+  87              		.align	2
+  88              	.L9:
+  89 0010 00000000 		.word	.LANCHOR0
+  90              		.cfi_endproc
+  91              	.LFE65:
+  92              		.size	CheckRX, .-CheckRX
+  93              		.global	RxFlag_Start
+  94              		.comm	PacketReadyFlag,1,1
+  95              		.comm	DataBuffer,32,4
+  96              		.bss
+  97              		.set	.LANCHOR0,. + 0
+  98              		.type	RxFlag_Start, %object
+  99              		.size	RxFlag_Start, 1
+ 100              	RxFlag_Start:
+ 101 0000 00       		.space	1
+ 102              		.text
+ 103              	.Letext0:
+ 104              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 105              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 106              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 107              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 108              		.file 6 "interrupt_routine.h"
+ 109              		.file 7 "Generated_Source\\PSoC5/UART_BlueT.h"
+ 110              		.section	.debug_info,"",%progbits
+ 111              	.Ldebug_info0:
+ 112 0000 64010000 		.4byte	0x164
+ 113 0004 0400     		.2byte	0x4
+ 114 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 115 000a 04       		.byte	0x4
+ 116 000b 01       		.uleb128 0x1
+ 117 000c 5C000000 		.4byte	.LASF25
+ 118 0010 0C       		.byte	0xc
+ 119 0011 49000000 		.4byte	.LASF26
+ 120 0015 55010000 		.4byte	.LASF27
+ 121 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 122 001d 00000000 		.4byte	0
+ 123 0021 00000000 		.4byte	.Ldebug_line0
+ 124 0025 02       		.uleb128 0x2
+ 125 0026 01       		.byte	0x1
+ 126 0027 06       		.byte	0x6
+ 127 0028 D8010000 		.4byte	.LASF0
+ 128 002c 02       		.uleb128 0x2
+ 129 002d 01       		.byte	0x1
+ 130 002e 08       		.byte	0x8
+ 131 002f 3B000000 		.4byte	.LASF1
+ 132 0033 02       		.uleb128 0x2
+ 133 0034 02       		.byte	0x2
+ 134 0035 05       		.byte	0x5
+ 135 0036 0B020000 		.4byte	.LASF2
+ 136 003a 02       		.uleb128 0x2
+ 137 003b 02       		.byte	0x2
+ 138 003c 07       		.byte	0x7
+ 139 003d 0E000000 		.4byte	.LASF3
+ 140 0041 03       		.uleb128 0x3
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 4
+
+
+ 141 0042 F0010000 		.4byte	.LASF9
+ 142 0046 02       		.byte	0x2
+ 143 0047 3F       		.byte	0x3f
+ 144 0048 4C000000 		.4byte	0x4c
+ 145 004c 02       		.uleb128 0x2
+ 146 004d 04       		.byte	0x4
+ 147 004e 05       		.byte	0x5
+ 148 004f 4C010000 		.4byte	.LASF4
+ 149 0053 02       		.uleb128 0x2
+ 150 0054 04       		.byte	0x4
+ 151 0055 07       		.byte	0x7
+ 152 0056 F2000000 		.4byte	.LASF5
+ 153 005a 02       		.uleb128 0x2
+ 154 005b 08       		.byte	0x8
+ 155 005c 05       		.byte	0x5
+ 156 005d 00000000 		.4byte	.LASF6
+ 157 0061 02       		.uleb128 0x2
+ 158 0062 08       		.byte	0x8
+ 159 0063 07       		.byte	0x7
+ 160 0064 20010000 		.4byte	.LASF7
+ 161 0068 04       		.uleb128 0x4
+ 162 0069 04       		.byte	0x4
+ 163 006a 05       		.byte	0x5
+ 164 006b 696E7400 		.ascii	"int\000"
+ 165 006f 02       		.uleb128 0x2
+ 166 0070 04       		.byte	0x4
+ 167 0071 07       		.byte	0x7
+ 168 0072 2E000000 		.4byte	.LASF8
+ 169 0076 03       		.uleb128 0x3
+ 170 0077 22020000 		.4byte	.LASF10
+ 171 007b 03       		.byte	0x3
+ 172 007c 2C       		.byte	0x2c
+ 173 007d 41000000 		.4byte	0x41
+ 174 0081 05       		.uleb128 0x5
+ 175 0082 56000000 		.4byte	.LASF11
+ 176 0086 04       		.byte	0x4
+ 177 0087 E901     		.2byte	0x1e9
+ 178 0089 2C000000 		.4byte	0x2c
+ 179 008d 02       		.uleb128 0x2
+ 180 008e 04       		.byte	0x4
+ 181 008f 04       		.byte	0x4
+ 182 0090 FA010000 		.4byte	.LASF12
+ 183 0094 02       		.uleb128 0x2
+ 184 0095 08       		.byte	0x8
+ 185 0096 04       		.byte	0x4
+ 186 0097 BC010000 		.4byte	.LASF13
+ 187 009b 02       		.uleb128 0x2
+ 188 009c 01       		.byte	0x1
+ 189 009d 08       		.byte	0x8
+ 190 009e 47010000 		.4byte	.LASF14
+ 191 00a2 06       		.uleb128 0x6
+ 192 00a3 81000000 		.4byte	0x81
+ 193 00a7 02       		.uleb128 0x2
+ 194 00a8 08       		.byte	0x8
+ 195 00a9 04       		.byte	0x4
+ 196 00aa E4010000 		.4byte	.LASF15
+ 197 00ae 02       		.uleb128 0x2
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 5
+
+
+ 198 00af 04       		.byte	0x4
+ 199 00b0 07       		.byte	0x7
+ 200 00b1 2A020000 		.4byte	.LASF16
+ 201 00b5 07       		.uleb128 0x7
+ 202 00b6 04010000 		.4byte	.LASF17
+ 203 00ba 01       		.byte	0x1
+ 204 00bb 11       		.byte	0x11
+ 205 00bc 00000000 		.4byte	.LFB64
+ 206 00c0 24000000 		.4byte	.LFE64-.LFB64
+ 207 00c4 01       		.uleb128 0x1
+ 208 00c5 9C       		.byte	0x9c
+ 209 00c6 DE000000 		.4byte	0xde
+ 210 00ca 08       		.uleb128 0x8
+ 211 00cb 12000000 		.4byte	.LVL0
+ 212 00cf 51010000 		.4byte	0x151
+ 213 00d3 09       		.uleb128 0x9
+ 214 00d4 01       		.uleb128 0x1
+ 215 00d5 50       		.byte	0x50
+ 216 00d6 05       		.uleb128 0x5
+ 217 00d7 03       		.byte	0x3
+ 218 00d8 00000000 		.4byte	DataBuffer
+ 219 00dc 00       		.byte	0
+ 220 00dd 00       		.byte	0
+ 221 00de 07       		.uleb128 0x7
+ 222 00df EA000000 		.4byte	.LASF18
+ 223 00e3 01       		.byte	0x1
+ 224 00e4 1C       		.byte	0x1c
+ 225 00e5 00000000 		.4byte	.LFB65
+ 226 00e9 14000000 		.4byte	.LFE65-.LFB65
+ 227 00ed 01       		.uleb128 0x1
+ 228 00ee 9C       		.byte	0x9c
+ 229 00ef FD000000 		.4byte	0xfd
+ 230 00f3 0A       		.uleb128 0xa
+ 231 00f4 06000000 		.4byte	.LVL1
+ 232 00f8 5C010000 		.4byte	0x15c
+ 233 00fc 00       		.byte	0
+ 234 00fd 0B       		.uleb128 0xb
+ 235 00fe 21000000 		.4byte	.LASF19
+ 236 0102 05       		.byte	0x5
+ 237 0103 1207     		.2byte	0x712
+ 238 0105 09010000 		.4byte	0x109
+ 239 0109 06       		.uleb128 0x6
+ 240 010a 76000000 		.4byte	0x76
+ 241 010e 0C       		.uleb128 0xc
+ 242 010f 9B000000 		.4byte	0x9b
+ 243 0113 1E010000 		.4byte	0x11e
+ 244 0117 0D       		.uleb128 0xd
+ 245 0118 AE000000 		.4byte	0xae
+ 246 011c 1F       		.byte	0x1f
+ 247 011d 00       		.byte	0
+ 248 011e 0E       		.uleb128 0xe
+ 249 011f 00020000 		.4byte	.LASF20
+ 250 0123 06       		.byte	0x6
+ 251 0124 17       		.byte	0x17
+ 252 0125 0E010000 		.4byte	0x10e
+ 253 0129 05       		.uleb128 0x5
+ 254 012a 03       		.byte	0x3
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 6
+
+
+ 255 012b 00000000 		.4byte	DataBuffer
+ 256 012f 0E       		.uleb128 0xe
+ 257 0130 37010000 		.4byte	.LASF21
+ 258 0134 06       		.byte	0x6
+ 259 0135 18       		.byte	0x18
+ 260 0136 A2000000 		.4byte	0xa2
+ 261 013a 05       		.uleb128 0x5
+ 262 013b 03       		.byte	0x3
+ 263 013c 00000000 		.4byte	PacketReadyFlag
+ 264 0140 0E       		.uleb128 0xe
+ 265 0141 15020000 		.4byte	.LASF22
+ 266 0145 06       		.byte	0x6
+ 267 0146 19       		.byte	0x19
+ 268 0147 A2000000 		.4byte	0xa2
+ 269 014b 05       		.uleb128 0x5
+ 270 014c 03       		.byte	0x3
+ 271 014d 00000000 		.4byte	RxFlag_Start
+ 272 0151 0F       		.uleb128 0xf
+ 273 0152 C3010000 		.4byte	.LASF23
+ 274 0156 C3010000 		.4byte	.LASF23
+ 275 015a 07       		.byte	0x7
+ 276 015b 8B       		.byte	0x8b
+ 277 015c 0F       		.uleb128 0xf
+ 278 015d 0D010000 		.4byte	.LASF24
+ 279 0161 0D010000 		.4byte	.LASF24
+ 280 0165 07       		.byte	0x7
+ 281 0166 72       		.byte	0x72
+ 282 0167 00       		.byte	0
+ 283              		.section	.debug_abbrev,"",%progbits
+ 284              	.Ldebug_abbrev0:
+ 285 0000 01       		.uleb128 0x1
+ 286 0001 11       		.uleb128 0x11
+ 287 0002 01       		.byte	0x1
+ 288 0003 25       		.uleb128 0x25
+ 289 0004 0E       		.uleb128 0xe
+ 290 0005 13       		.uleb128 0x13
+ 291 0006 0B       		.uleb128 0xb
+ 292 0007 03       		.uleb128 0x3
+ 293 0008 0E       		.uleb128 0xe
+ 294 0009 1B       		.uleb128 0x1b
+ 295 000a 0E       		.uleb128 0xe
+ 296 000b 55       		.uleb128 0x55
+ 297 000c 17       		.uleb128 0x17
+ 298 000d 11       		.uleb128 0x11
+ 299 000e 01       		.uleb128 0x1
+ 300 000f 10       		.uleb128 0x10
+ 301 0010 17       		.uleb128 0x17
+ 302 0011 00       		.byte	0
+ 303 0012 00       		.byte	0
+ 304 0013 02       		.uleb128 0x2
+ 305 0014 24       		.uleb128 0x24
+ 306 0015 00       		.byte	0
+ 307 0016 0B       		.uleb128 0xb
+ 308 0017 0B       		.uleb128 0xb
+ 309 0018 3E       		.uleb128 0x3e
+ 310 0019 0B       		.uleb128 0xb
+ 311 001a 03       		.uleb128 0x3
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 7
+
+
+ 312 001b 0E       		.uleb128 0xe
+ 313 001c 00       		.byte	0
+ 314 001d 00       		.byte	0
+ 315 001e 03       		.uleb128 0x3
+ 316 001f 16       		.uleb128 0x16
+ 317 0020 00       		.byte	0
+ 318 0021 03       		.uleb128 0x3
+ 319 0022 0E       		.uleb128 0xe
+ 320 0023 3A       		.uleb128 0x3a
+ 321 0024 0B       		.uleb128 0xb
+ 322 0025 3B       		.uleb128 0x3b
+ 323 0026 0B       		.uleb128 0xb
+ 324 0027 49       		.uleb128 0x49
+ 325 0028 13       		.uleb128 0x13
+ 326 0029 00       		.byte	0
+ 327 002a 00       		.byte	0
+ 328 002b 04       		.uleb128 0x4
+ 329 002c 24       		.uleb128 0x24
+ 330 002d 00       		.byte	0
+ 331 002e 0B       		.uleb128 0xb
+ 332 002f 0B       		.uleb128 0xb
+ 333 0030 3E       		.uleb128 0x3e
+ 334 0031 0B       		.uleb128 0xb
+ 335 0032 03       		.uleb128 0x3
+ 336 0033 08       		.uleb128 0x8
+ 337 0034 00       		.byte	0
+ 338 0035 00       		.byte	0
+ 339 0036 05       		.uleb128 0x5
+ 340 0037 16       		.uleb128 0x16
+ 341 0038 00       		.byte	0
+ 342 0039 03       		.uleb128 0x3
+ 343 003a 0E       		.uleb128 0xe
+ 344 003b 3A       		.uleb128 0x3a
+ 345 003c 0B       		.uleb128 0xb
+ 346 003d 3B       		.uleb128 0x3b
+ 347 003e 05       		.uleb128 0x5
+ 348 003f 49       		.uleb128 0x49
+ 349 0040 13       		.uleb128 0x13
+ 350 0041 00       		.byte	0
+ 351 0042 00       		.byte	0
+ 352 0043 06       		.uleb128 0x6
+ 353 0044 35       		.uleb128 0x35
+ 354 0045 00       		.byte	0
+ 355 0046 49       		.uleb128 0x49
+ 356 0047 13       		.uleb128 0x13
+ 357 0048 00       		.byte	0
+ 358 0049 00       		.byte	0
+ 359 004a 07       		.uleb128 0x7
+ 360 004b 2E       		.uleb128 0x2e
+ 361 004c 01       		.byte	0x1
+ 362 004d 3F       		.uleb128 0x3f
+ 363 004e 19       		.uleb128 0x19
+ 364 004f 03       		.uleb128 0x3
+ 365 0050 0E       		.uleb128 0xe
+ 366 0051 3A       		.uleb128 0x3a
+ 367 0052 0B       		.uleb128 0xb
+ 368 0053 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 8
+
+
+ 369 0054 0B       		.uleb128 0xb
+ 370 0055 11       		.uleb128 0x11
+ 371 0056 01       		.uleb128 0x1
+ 372 0057 12       		.uleb128 0x12
+ 373 0058 06       		.uleb128 0x6
+ 374 0059 40       		.uleb128 0x40
+ 375 005a 18       		.uleb128 0x18
+ 376 005b 9742     		.uleb128 0x2117
+ 377 005d 19       		.uleb128 0x19
+ 378 005e 01       		.uleb128 0x1
+ 379 005f 13       		.uleb128 0x13
+ 380 0060 00       		.byte	0
+ 381 0061 00       		.byte	0
+ 382 0062 08       		.uleb128 0x8
+ 383 0063 898201   		.uleb128 0x4109
+ 384 0066 01       		.byte	0x1
+ 385 0067 11       		.uleb128 0x11
+ 386 0068 01       		.uleb128 0x1
+ 387 0069 31       		.uleb128 0x31
+ 388 006a 13       		.uleb128 0x13
+ 389 006b 00       		.byte	0
+ 390 006c 00       		.byte	0
+ 391 006d 09       		.uleb128 0x9
+ 392 006e 8A8201   		.uleb128 0x410a
+ 393 0071 00       		.byte	0
+ 394 0072 02       		.uleb128 0x2
+ 395 0073 18       		.uleb128 0x18
+ 396 0074 9142     		.uleb128 0x2111
+ 397 0076 18       		.uleb128 0x18
+ 398 0077 00       		.byte	0
+ 399 0078 00       		.byte	0
+ 400 0079 0A       		.uleb128 0xa
+ 401 007a 898201   		.uleb128 0x4109
+ 402 007d 00       		.byte	0
+ 403 007e 11       		.uleb128 0x11
+ 404 007f 01       		.uleb128 0x1
+ 405 0080 31       		.uleb128 0x31
+ 406 0081 13       		.uleb128 0x13
+ 407 0082 00       		.byte	0
+ 408 0083 00       		.byte	0
+ 409 0084 0B       		.uleb128 0xb
+ 410 0085 34       		.uleb128 0x34
+ 411 0086 00       		.byte	0
+ 412 0087 03       		.uleb128 0x3
+ 413 0088 0E       		.uleb128 0xe
+ 414 0089 3A       		.uleb128 0x3a
+ 415 008a 0B       		.uleb128 0xb
+ 416 008b 3B       		.uleb128 0x3b
+ 417 008c 05       		.uleb128 0x5
+ 418 008d 49       		.uleb128 0x49
+ 419 008e 13       		.uleb128 0x13
+ 420 008f 3F       		.uleb128 0x3f
+ 421 0090 19       		.uleb128 0x19
+ 422 0091 3C       		.uleb128 0x3c
+ 423 0092 19       		.uleb128 0x19
+ 424 0093 00       		.byte	0
+ 425 0094 00       		.byte	0
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 9
+
+
+ 426 0095 0C       		.uleb128 0xc
+ 427 0096 01       		.uleb128 0x1
+ 428 0097 01       		.byte	0x1
+ 429 0098 49       		.uleb128 0x49
+ 430 0099 13       		.uleb128 0x13
+ 431 009a 01       		.uleb128 0x1
+ 432 009b 13       		.uleb128 0x13
+ 433 009c 00       		.byte	0
+ 434 009d 00       		.byte	0
+ 435 009e 0D       		.uleb128 0xd
+ 436 009f 21       		.uleb128 0x21
+ 437 00a0 00       		.byte	0
+ 438 00a1 49       		.uleb128 0x49
+ 439 00a2 13       		.uleb128 0x13
+ 440 00a3 2F       		.uleb128 0x2f
+ 441 00a4 0B       		.uleb128 0xb
+ 442 00a5 00       		.byte	0
+ 443 00a6 00       		.byte	0
+ 444 00a7 0E       		.uleb128 0xe
+ 445 00a8 34       		.uleb128 0x34
+ 446 00a9 00       		.byte	0
+ 447 00aa 03       		.uleb128 0x3
+ 448 00ab 0E       		.uleb128 0xe
+ 449 00ac 3A       		.uleb128 0x3a
+ 450 00ad 0B       		.uleb128 0xb
+ 451 00ae 3B       		.uleb128 0x3b
+ 452 00af 0B       		.uleb128 0xb
+ 453 00b0 49       		.uleb128 0x49
+ 454 00b1 13       		.uleb128 0x13
+ 455 00b2 3F       		.uleb128 0x3f
+ 456 00b3 19       		.uleb128 0x19
+ 457 00b4 02       		.uleb128 0x2
+ 458 00b5 18       		.uleb128 0x18
+ 459 00b6 00       		.byte	0
+ 460 00b7 00       		.byte	0
+ 461 00b8 0F       		.uleb128 0xf
+ 462 00b9 2E       		.uleb128 0x2e
+ 463 00ba 00       		.byte	0
+ 464 00bb 3F       		.uleb128 0x3f
+ 465 00bc 19       		.uleb128 0x19
+ 466 00bd 3C       		.uleb128 0x3c
+ 467 00be 19       		.uleb128 0x19
+ 468 00bf 6E       		.uleb128 0x6e
+ 469 00c0 0E       		.uleb128 0xe
+ 470 00c1 03       		.uleb128 0x3
+ 471 00c2 0E       		.uleb128 0xe
+ 472 00c3 3A       		.uleb128 0x3a
+ 473 00c4 0B       		.uleb128 0xb
+ 474 00c5 3B       		.uleb128 0x3b
+ 475 00c6 0B       		.uleb128 0xb
+ 476 00c7 00       		.byte	0
+ 477 00c8 00       		.byte	0
+ 478 00c9 00       		.byte	0
+ 479              		.section	.debug_aranges,"",%progbits
+ 480 0000 24000000 		.4byte	0x24
+ 481 0004 0200     		.2byte	0x2
+ 482 0006 00000000 		.4byte	.Ldebug_info0
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 10
+
+
+ 483 000a 04       		.byte	0x4
+ 484 000b 00       		.byte	0
+ 485 000c 0000     		.2byte	0
+ 486 000e 0000     		.2byte	0
+ 487 0010 00000000 		.4byte	.LFB64
+ 488 0014 24000000 		.4byte	.LFE64-.LFB64
+ 489 0018 00000000 		.4byte	.LFB65
+ 490 001c 14000000 		.4byte	.LFE65-.LFB65
+ 491 0020 00000000 		.4byte	0
+ 492 0024 00000000 		.4byte	0
+ 493              		.section	.debug_ranges,"",%progbits
+ 494              	.Ldebug_ranges0:
+ 495 0000 00000000 		.4byte	.LFB64
+ 496 0004 24000000 		.4byte	.LFE64
+ 497 0008 00000000 		.4byte	.LFB65
+ 498 000c 14000000 		.4byte	.LFE65
+ 499 0010 00000000 		.4byte	0
+ 500 0014 00000000 		.4byte	0
+ 501              		.section	.debug_line,"",%progbits
+ 502              	.Ldebug_line0:
+ 503 0000 A2010000 		.section	.debug_str,"MS",%progbits,1
+ 503      02007901 
+ 503      00000201 
+ 503      FB0E0D00 
+ 503      01010101 
+ 504              	.LASF6:
+ 505 0000 6C6F6E67 		.ascii	"long long int\000"
+ 505      206C6F6E 
+ 505      6720696E 
+ 505      7400
+ 506              	.LASF3:
+ 507 000e 73686F72 		.ascii	"short unsigned int\000"
+ 507      7420756E 
+ 507      7369676E 
+ 507      65642069 
+ 507      6E7400
+ 508              	.LASF19:
+ 509 0021 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 509      52784275 
+ 509      66666572 
+ 509      00
+ 510              	.LASF8:
+ 511 002e 756E7369 		.ascii	"unsigned int\000"
+ 511      676E6564 
+ 511      20696E74 
+ 511      00
+ 512              	.LASF1:
+ 513 003b 756E7369 		.ascii	"unsigned char\000"
+ 513      676E6564 
+ 513      20636861 
+ 513      7200
+ 514              	.LASF26:
+ 515 0049 756E7469 		.ascii	"untitled01.c\000"
+ 515      746C6564 
+ 515      30312E63 
+ 515      00
+ 516              	.LASF11:
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 11
+
+
+ 517 0056 75696E74 		.ascii	"uint8\000"
+ 517      3800
+ 518              	.LASF25:
+ 519 005c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 519      43313120 
+ 519      352E342E 
+ 519      31203230 
+ 519      31363036 
+ 520 008f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 520      20726576 
+ 520      6973696F 
+ 520      6E203233 
+ 520      37373135 
+ 521 00c2 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 521      66756E63 
+ 521      74696F6E 
+ 521      2D736563 
+ 521      74696F6E 
+ 522              	.LASF18:
+ 523 00ea 43686563 		.ascii	"CheckRX\000"
+ 523      6B525800 
+ 524              	.LASF5:
+ 525 00f2 6C6F6E67 		.ascii	"long unsigned int\000"
+ 525      20756E73 
+ 525      69676E65 
+ 525      6420696E 
+ 525      7400
+ 526              	.LASF17:
+ 527 0104 53656E64 		.ascii	"SendData\000"
+ 527      44617461 
+ 527      00
+ 528              	.LASF24:
+ 529 010d 55415254 		.ascii	"UART_BlueT_GetByte\000"
+ 529      5F426C75 
+ 529      65545F47 
+ 529      65744279 
+ 529      746500
+ 530              	.LASF7:
+ 531 0120 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 531      206C6F6E 
+ 531      6720756E 
+ 531      7369676E 
+ 531      65642069 
+ 532              	.LASF21:
+ 533 0137 5061636B 		.ascii	"PacketReadyFlag\000"
+ 533      65745265 
+ 533      61647946 
+ 533      6C616700 
+ 534              	.LASF14:
+ 535 0147 63686172 		.ascii	"char\000"
+ 535      00
+ 536              	.LASF4:
+ 537 014c 6C6F6E67 		.ascii	"long int\000"
+ 537      20696E74 
+ 537      00
+ 538              	.LASF27:
+ 539 0155 433A5C55 		.ascii	"C:\\Users\\gianm\\Desktop\\A.A. 2022-2023\\LAB+\\PR"
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 12
+
+
+ 539      73657273 
+ 539      5C676961 
+ 539      6E6D5C44 
+ 539      65736B74 
+ 540 0182 4F474554 		.ascii	"OGETTO+\\project files\\psoc\\WorkspaceTest\\Blueth"
+ 540      544F2B5C 
+ 540      70726F6A 
+ 540      65637420 
+ 540      66696C65 
+ 541 01b1 5F506F74 		.ascii	"_Pot.cydsn\000"
+ 541      2E637964 
+ 541      736E00
+ 542              	.LASF13:
+ 543 01bc 646F7562 		.ascii	"double\000"
+ 543      6C6500
+ 544              	.LASF23:
+ 545 01c3 55415254 		.ascii	"UART_BlueT_PutString\000"
+ 545      5F426C75 
+ 545      65545F50 
+ 545      75745374 
+ 545      72696E67 
+ 546              	.LASF0:
+ 547 01d8 7369676E 		.ascii	"signed char\000"
+ 547      65642063 
+ 547      68617200 
+ 548              	.LASF15:
+ 549 01e4 6C6F6E67 		.ascii	"long double\000"
+ 549      20646F75 
+ 549      626C6500 
+ 550              	.LASF9:
+ 551 01f0 5F5F696E 		.ascii	"__int32_t\000"
+ 551      7433325F 
+ 551      7400
+ 552              	.LASF12:
+ 553 01fa 666C6F61 		.ascii	"float\000"
+ 553      7400
+ 554              	.LASF20:
+ 555 0200 44617461 		.ascii	"DataBuffer\000"
+ 555      42756666 
+ 555      657200
+ 556              	.LASF2:
+ 557 020b 73686F72 		.ascii	"short int\000"
+ 557      7420696E 
+ 557      7400
+ 558              	.LASF22:
+ 559 0215 5278466C 		.ascii	"RxFlag_Start\000"
+ 559      61675F53 
+ 559      74617274 
+ 559      00
+ 560              	.LASF10:
+ 561 0222 696E7433 		.ascii	"int32_t\000"
+ 561      325F7400 
+ 562              	.LASF16:
+ 563 022a 73697A65 		.ascii	"sizetype\000"
+ 563      74797065 
+ 563      00
+ 564              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ARM GAS  C:\Users\gianm\AppData\Local\Temp\cc1X4rbE.s 			page 13
+
+

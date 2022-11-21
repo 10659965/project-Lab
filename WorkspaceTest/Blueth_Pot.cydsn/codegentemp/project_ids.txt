@@ -1,0 +1,10 @@
+C:\Users\gianm\Desktop\A.A. 2022-2023\LAB+\03_Support_Materials-20221004\PSOC\PSoC_AnnotationLibrary\AnnotationLibrary\AnnotationLibrary_lib\AnnotationLibrary_lib.cylib\AnnotationLibrary_lib.cyprj|8472a2ee-3268-40f9-a0a0-722ee761236b
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|dfe29562-75be-429b-9211-17255aeae77a
+C:\Users\gianm\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|e13862c3-99cc-4fea-8908-36161e03ee14
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|f4794e19-ea5f-41b4-a1c3-80dc67af3109
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|2ca0368a-e6e1-4962-b496-e4b4e590074a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|c3b649bb-e478-49a5-bc68-c07ecdba7005
+C:\Users\gianm\Desktop\A.A. 2022-2023\LAB+\PROGETTO-ASSIGNMENT\Assignment\WORKSPACEPSOC\LAB22-23SENSORI\02-12102022.cydsn\02-12102022.cyprj|570b8142-a1aa-4497-a5fa-2412a7ac82e6
+C:\Users\gianm\Desktop\A.A. 2022-2023\LAB+\PROGETTO+\file dottorandi\PSoC-Bluetooth-Test\BT_UART.cydsn\BT_UART.cyprj|73706c1d-3b82-4af4-bde4-fb2ac5f3f265
+C:\Users\gianm\Desktop\A.A. 2022-2023\LAB+\PROGETTO-ASSIGNMENT\Assignment\WORKSPACEPSOC\LAB22-23SENSORI\02-19102022.cydsn\02-19102022.cyprj|8fcd434a-8a96-4fd7-8529-973ca051d28a
+C:\Users\gianm\Desktop\A.A. 2022-2023\LAB+\PROGETTO+\project files\psoc\WorkspaceTest\Blueth_Pot.cydsn\Blueth_Pot.cyprj|aebc52e5-3221-4122-ba8b-5aada1fa7b46

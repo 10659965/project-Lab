@@ -1,0 +1,70 @@
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/CortexM3/ARM_GCC_541/Debug/interrupt_routine.o : C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/ADC_Pot.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/ADC_Pot_AMux.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/ADC_Pot_Ext_CP_Clk.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/ADC_Pot_IRQ.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/ADC_Pot_theACLK.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/CyDmac.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/CyFlash.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/CyLib.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/CySpc.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/PIn_Pot.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/PIn_Pot_aliases.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/Timer_ADC.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/UART_BlueT.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/UART_BlueT_IntClock.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cmsis_armcc.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cmsis_compiler.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cmsis_gcc.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/core_cm3.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/core_cm3_psoc5.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cyPm.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cy_em_eeprom.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cydevice.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cydevice_trm.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cydisabledsheets.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cyfitter.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cyfitter_cfg.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cypins.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cytypes.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/isr_RX_inter.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/isr_TimerADC_inter.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/project.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/timer_clock.h C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/interrupt_routine.c C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/interrupt_routine.h 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/ADC_Pot.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/ADC_Pot_AMux.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/ADC_Pot_Ext_CP_Clk.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/ADC_Pot_IRQ.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/ADC_Pot_theACLK.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/CyDmac.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/CyFlash.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/CyLib.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/CySpc.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/PIn_Pot.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/PIn_Pot_aliases.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/Timer_ADC.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/UART_BlueT.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/UART_BlueT_IntClock.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cmsis_armcc.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cmsis_compiler.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cmsis_gcc.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/core_cm3.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/core_cm3_psoc5.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cyPm.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cy_em_eeprom.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cydevice.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cydevice_trm.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cydisabledsheets.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cyfitter.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cyfitter_cfg.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cypins.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/cytypes.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/isr_RX_inter.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/isr_TimerADC_inter.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/project.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/Generated_Source/PSoC5/timer_clock.h : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/interrupt_routine.c : 
+
+C:/Users/gianm/Desktop/A.A.\ 2022-2023/LAB+/PROGETTO+/project\ files/psoc/WorkspaceTest/Blueth_Pot.cydsn/interrupt_routine.h : 
+
