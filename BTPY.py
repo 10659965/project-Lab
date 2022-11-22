@@ -51,28 +51,63 @@ class MainWindow(QMainWindow):
         self.baud=BAUDRATE
         self.s=serial.Serial()
         self.butt_bt.pressed.connect(self.ScanCom)
+        self.chreceived=''
+        self.chserial=''
 
         #SearcCom()
         self.InitGUI()
         
 
     def ScanCom(self):
+        global STATO
         listCom=[]
+        
         for x in serial.tools.list_ports.comports():
             listCom.append(str(x.name))
         print(listCom)
+        STATO="SEARCHING"
+        self.ChangeStatus(STATO)
         self.SearchCom(listCom)
 
     def SearchCom(self,list):
+        
+        global STATO
+        global CONNECTION_FLAG
+        
+        
+
         try:
-            for xc in list:
-                self.s=serial.Serial(xc,self.baud,write_timeout=0, timeout=5)
-                if self.s.is_open:
-                    print(xc)
-        except serial.SerialException:    
-            self.displayerrorport(xc)
+            if CONNECTION_FLAG ==0:
+                for xc in list:
+                    self.s=serial.Serial(xc,self.baud,write_timeout=0, timeout=5)
+                    if self.s.is_open and CONNECTION_FLAG==0:
+                        print(xc)
+                        self.chreceived=self.ReadDataSerial()
+                        print(str(self.chreceived))
+                        if self.chreceived == '\'\'':
+                            print("connection estabilished")
+                            STATO='CONNECTED'
+                            self.ChangeStatus(STATO)
+                            CONNECTION_FLAG=1
+                        
+
+
+
+        except serial.SerialException:
+            if CONNECTION_FLAG==0:    
+                self.displayerrorport(xc)
+            
+
 
             
+    def ReadDataSerial(self):
+        self.chserial=str(self.s.readline())
+        self.chserial=self.chserial[1:]
+        return self.chserial
+
+
+    def ChangeStatus(self, status):
+        self.label_status.setText(str(status))
 
 
     def InitGUI(self):
@@ -108,7 +143,7 @@ class MainWindow(QMainWindow):
         """
 
         #try new class for error dialog
-        self.ErrorCOM=ErrorW(300,200,'ERROR PORT: '+xc,'ERROR')
+        self.ErrorCOM=ErrorW(300,200,'ERROR PORT CONNECTION: '+xc,'ERROR')
         self.ErrorCOM.exec_()
 
 class ErrorW(QDialog):
