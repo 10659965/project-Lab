@@ -113,10 +113,10 @@ class MainWindow(QMainWindow):
 
 class ErrorW(QDialog):
     def __init__(self,width,height,errorText,windowTitle):
-        super(QDialog).__init__()
+        super(QDialog,self).__init__()
         self.width=width
         self.height=height
-        self.dialog_errorport.setMinimumSize(width, height)
+        self.setMinimumSize(width, height)
         self.err_text=str(errorText)
         self.win_text=str(windowTitle)
         self.Text=QLabel(errorText)
@@ -127,8 +127,8 @@ class ErrorW(QDialog):
         self.hlay=QHBoxLayout()
         self.hlay.addWidget(self.Text)
         self.vlay=QVBoxLayout()
-        self.vlay.addLayout(self.error_hlay)
-        self.setLayout(self.error_vlay)
+        self.vlay.addLayout(self.hlay)
+        self.setLayout(self.vlay)
         
 
 
