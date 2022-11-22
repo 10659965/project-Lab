@@ -27,7 +27,7 @@ from PyQt5.QtWidgets import (
 )
 
 STATO=0
-CONNECTION_FLAG=0
+
 BAUDRATE=9600
 
 HEIGHT_M=300
@@ -39,6 +39,9 @@ class MainWindow(QMainWindow):
 
         global HEIGHT_M,WIDTH_M
         
+
+        self.connectionFlag=0
+
         self.setWindowTitle("Scan BT Devices")
         self.MainWindowSize=[HEIGHT_M,WIDTH_M]
         self.setMinimumSize(self.MainWindowSize[0],self.MainWindowSize[1])
@@ -51,6 +54,8 @@ class MainWindow(QMainWindow):
         self.baud=BAUDRATE
         self.s=serial.Serial()
         self.butt_bt.pressed.connect(self.ScanCom)
+        
+
         self.chreceived=''
         self.chserial=''
 
@@ -60,27 +65,27 @@ class MainWindow(QMainWindow):
 
     def ScanCom(self):
         global STATO
+        STATO="SEARCHING"
+        self.ChangeStatus(STATO)
         listCom=[]
         
         for x in serial.tools.list_ports.comports():
             listCom.append(str(x.name))
         print(listCom)
-        STATO="SEARCHING"
-        self.ChangeStatus(STATO)
+        
         self.SearchCom(listCom)
 
     def SearchCom(self,list):
         
         global STATO
-        global CONNECTION_FLAG
         
         
 
         try:
-            if CONNECTION_FLAG ==0:
+            if self.connectionFlag ==0:
                 for xc in list:
                     self.s=serial.Serial(xc,self.baud,write_timeout=0, timeout=5)
-                    if self.s.is_open and CONNECTION_FLAG==0:
+                    if self.s.is_open and self.connectionFlag==0:
                         print(xc)
                         self.chreceived=self.ReadDataSerial()
                         print(str(self.chreceived))
@@ -88,13 +93,14 @@ class MainWindow(QMainWindow):
                             print("connection estabilished")
                             STATO='CONNECTED'
                             self.ChangeStatus(STATO)
-                            CONNECTION_FLAG=1
+                            self.connectionFlag=1
+                            self.butt_bt.setDisabled(True)
                         
 
 
 
         except serial.SerialException:
-            if CONNECTION_FLAG==0:    
+            if self.connectionFlag==0:    
                 self.displayerrorport(xc)
             
 
