@@ -159,8 +159,11 @@ class ErrorW(QDialog):
         self.height=height
         self.setMinimumSize(width, height)
         self.err_text=str(errorText)
+        self.err_text.setBold(True)
+        
         self.win_text=str(windowTitle)
-        self.Text=QLabel(errorText)
+        self.Text=QLabel(self.err_text.upper())
+        
         
         self.setWindowTitle(self.win_text)
 
