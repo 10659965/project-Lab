@@ -88,6 +88,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
     def displayerrorport(self,xc):
+        """!
         self.dialog_errorport=QDialog(self)
         width = 300
         height = 250
@@ -104,8 +105,31 @@ class MainWindow(QMainWindow):
         self.dialog_errorport.setLayout(self.error_vlay)
         
         self.dialog_errorport.exec_()
+        """
 
+        #try new class for error dialog
+        self.ErrorCOM=ErrorW(300,200,'ERROR PORT: '+xc,'ERROR')
+        self.ErrorCOM.exec_()
 
+class ErrorW(QDialog):
+    def __init__(self,width,height,errorText,windowTitle):
+        super(QDialog).__init__()
+        self.width=width
+        self.height=height
+        self.dialog_errorport.setMinimumSize(width, height)
+        self.err_text=str(errorText)
+        self.win_text=str(windowTitle)
+        self.Text=QLabel(errorText)
+        
+        self.setWindowTitle(self.win_text)
+
+        #define layout
+        self.hlay=QHBoxLayout()
+        self.hlay.addWidget(self.Text)
+        self.vlay=QVBoxLayout()
+        self.vlay.addLayout(self.error_hlay)
+        self.setLayout(self.error_vlay)
+        
 
 
 
