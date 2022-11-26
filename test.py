@@ -47,7 +47,8 @@ class MainWindow(QMainWindow):
       super(MainWindow, self).__init__()
       #self.BT_W=BT_search()
       self.setWindowTitle("main")
-      self.e = BT_search()
+      
+      self.e = BT_search('\'\'')
       #self.e.show()
       self.check=QLabel("ciao")
       #self.BT_W.show()
