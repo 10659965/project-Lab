@@ -53,7 +53,7 @@ class MainWindow(QMainWindow):
 
 
 class BT_search(QWidget):
-    def __init__(self):
+    def __init__(self,str_compare):
         super().__init__()
         
         
@@ -78,6 +78,7 @@ class BT_search(QWidget):
 
         self.chreceived=''
         self.chserial=''
+        self.ch_compare=str(str_compare)
 
         #SearcCom()
         self.visual()
@@ -104,12 +105,12 @@ class BT_search(QWidget):
         try:
             if self.connectionFlag ==0:
                 for xc in list:
-                    self.s=serial.Serial(xc,self.baud,write_timeout=0, timeout=5)
+                    self.s=serial.Serial(xc,self.baud,write_timeout=0, timeout=10)
                     if self.s.is_open and self.connectionFlag==0:
                         print(xc)
                         self.chreceived=self.ReadDataSerial()
                         print(str(self.chreceived))
-                        if self.chreceived == '\'\'':
+                        if self.chreceived == self.ch_compare:
                             print("connection estabilished")
                             self.stato='CONNECTED'
                             self.ChangeStatus(self.stato)
@@ -190,7 +191,7 @@ class ErrorW(QDialog):
         self.height=height
         self.setMinimumSize(width, height)
         self.err_text=str(errorText)
-        self.err_text.setBold(True)
+        
         
         self.win_text=str(windowTitle)
         self.Text=QLabel(self.err_text.upper())
@@ -199,11 +200,11 @@ class ErrorW(QDialog):
         self.setWindowTitle(self.win_text)
 
         #define layout
-        self.hlay=QHBoxLayout()
-        self.hlay.addWidget(self.Text)
-        self.vlay=QVBoxLayout()
-        self.vlay.addLayout(self.hlay)
-        self.setLayout(self.vlay)
+        hlay=QHBoxLayout()
+        hlay.addWidget(self.Text)
+        vlay=QVBoxLayout()
+        vlay.addLayout(hlay)
+        self.setLayout(vlay)
 
 #############
 #  RUN APP  #
