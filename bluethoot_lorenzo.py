@@ -24,12 +24,25 @@ acc_vect = []
 X = []
 Y = []
 Z = []
+flagconnection=0
 while(1):
 
     if(serialPort.in_waiting > 0):
-
-        serial = serialPort.read(194)
-        #print(serial)
+       
+        if flagconnection==0:    
+            serial=serialPort.read(7)
+            print(serial)
+            if "Ready" in str(serial):
+                
+                flagconnection=1
+                print(flagconnection)
+                serialPort.write(1)
+        print("flagconn:"+str(flagconnection))
+        if flagconnection==1:
+            serial=serialPort.read(194)
+        print(str(serial))
+        #noserial=serialPort.read_until("\n")
+        #print(str(noserial))
         byte =[]
 
         if (serial[0] == header and serial[193] == tail and len(serial) == byte_to_receiv):
