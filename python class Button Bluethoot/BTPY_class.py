@@ -29,28 +29,12 @@ from PyQt5.QtWidgets import (
 
 STATO=0
 
-BAUDRATE=9600
+BAUDRATE=115200
 
 HEIGHT_M=300
 WIDTH_M=300
-
-
-'''
-class MainWindow(QMainWindow):
-    def __init__(self):
-        super(MainWindow,self).__init__()
-        self.BT=BT_search()
-        
-        #self.BT.exec_()
-        #self.setCentralWidget(self.BT)
-        
-'''
-
-    
-        
-        
-
-
+class SignalSearch(QObject):
+    portname=pyqtSignal(str)
 
 class BT_search(QWidget):
     def __init__(self,str_compare):
@@ -81,6 +65,7 @@ class BT_search(QWidget):
         self.chserial=''
         self.ch_compare=str(str_compare)
 
+        self.signalport=SignalSearch()
         #SearcCom()
         self.visual()
         
@@ -95,7 +80,7 @@ class BT_search(QWidget):
             listCom.append(str(x.name))
         print(listCom)
         
-        self.portName=self.SearchCom(listCom)
+        self.SearchCom(listCom)
         
 
     def SearchCom(self,list):
@@ -119,8 +104,11 @@ class BT_search(QWidget):
                             self.ChangeStatus(self.stato+':'+xc)
                             self.connectionFlag=1
                             self.butt_bt.setDisabled(True)
+                            self.portName=xc
+                            self.s.close()
+                            self.signalport.portname.emit(xc)
+
                             
-                            return xc
                         
 
 
@@ -128,11 +116,12 @@ class BT_search(QWidget):
         except serial.SerialException:
             if self.connectionFlag==0:    
                 self.displayerrorport(xc)
-                pass
+                self.ChangeStatus('ERROR CONNECTION')
+                
             
 
 
-            
+         
     def ChangeStatus(self, status):
         self.label_status.setText(str(status))
         

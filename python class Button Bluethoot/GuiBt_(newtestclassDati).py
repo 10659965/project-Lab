@@ -2,7 +2,6 @@ import serial
 import numpy as np
 import sys
 import ctypes
-import time
 
 from PyQt5.QtCore import (
     QObject,
@@ -31,33 +30,41 @@ from class_Dati import (
     WorkerKilled,
     convert
 )
+from BTPY_class import(
+    BT_search
+)
+
     
 
 
 
 
 
-class WidgetDati(QWidget):
+class MainW(QMainWindow):
     def __init__(self):
-        super().__init__()
+        super(MainW,self).__init__()
         self.X=[]
         self.Y=[]
         self.Z=[]
         self.time=[]
-        
-        
-        
-        self.serialport=None
+        self.portname=''
         
         self.setWindowTitle("classDatiTest")
 
         self.startAcq=QPushButton("Start Acquisition")
+        self.startAcq.setDisabled(True)
         self.stopAcq=QPushButton("Stop Acquisition")
+        self.stopAcq.setDisabled(True)
         self.ShowData=QPushButton("ShowData")
+        self.ShowData.setDisabled(True)
 
-        self.Dati=DatiSerial(None,None)
+        self.Dati=DatiSerial(None,'Ready')
         
         self.ThreadDati=QThreadPool()
+
+        self.searchWdiget=BT_search('Ready')
+
+        self.searchWdiget.signalport.portname.connect(self.SetPort)
         
         self.startAcq.pressed.connect(self.StartAcquisition)
         self.stopAcq.pressed.connect(self.AbortAcquisition)
@@ -76,18 +83,12 @@ class WidgetDati(QWidget):
     
     def StartAcquisition(self):
             self.FlagStart=True
-            self.Dati=DatiSerial(self.serialport,'Ready')
-            time.sleep(0.05)
-            self.StartThread()
+            self.ThreadDati.start(self.Dati)
             self.Dati.is_killed=False
             print("iskilled:"+str(self.Dati.is_killed))
-            print("connected to port: "+str(self.Dati.PortName))
             self.startAcq.setDisabled(True)
             
-    def StartThread(self):
-        self.ThreadDati=QThreadPool()
-        self.ThreadDati.start(self.Dati)
-        
+
     
     def AbortAcquisition(self):
         self.Dati.Abort()
@@ -115,18 +116,46 @@ class WidgetDati(QWidget):
         print(self.X)
         print(len(self.X))
 
-    def setPortW(self,portname):
-        self.serialport=portname    
+    def SetPort(self,Port):
+        self.portname=str(Port)
+        self.Dati=DatiSerial(str(Port),'Ready')
+        self.startAcq.setDisabled(False)
+        self.stopAcq.setDisabled(False)
+        self.ShowData.setDisabled(False)
+        
 
     def initGUI(self):
-        
+        Wid=QWidget()
         hlay=QHBoxLayout()
         hlay.addWidget(self.startAcq)
         hlay.addWidget(self.stopAcq)
+        hlay.addWidget(self.searchWdiget)
         vlay=QVBoxLayout()
         vlay.addLayout(hlay)
         vlay.addWidget(self.ShowData)
-        self.setLayout(vlay)
+        Wid.setLayout(vlay)
+        self.setCentralWidget(Wid)
+
+if __name__ == '__main__':
+    # You need one (and only one) QApplication instance per application.
+    # Pass in sys.argv to allow command line arguments for your app.
+    # If you know you won't use command line arguments QApplication([])
+    # works too.
+    app = QApplication(sys.argv)
+    
+    # Create a Qt widget, which will be our window.
+    
+    w = MainW()
+    w.show() # IMPORTANT!!!!! Windows are hidden by default.
+    
+    # Start the event loop.
+    
+    '''
+    bt=BT_search()
+    bt.show()
+    '''
+    
+    sys.exit(app.exec_())
 
 
         

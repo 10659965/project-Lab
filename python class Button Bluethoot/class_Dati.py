@@ -151,7 +151,7 @@ class DatiSerial(QRunnable):
 
 
         except WorkerKilled:
-            print("killed")
+            self.signals.service_string.emit("killed")
             self.serialPort.close()
             time.sleep(0.5)
 
