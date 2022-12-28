@@ -48,6 +48,7 @@ class MainWindow(QMainWindow):
         self.DataLabelY=QLabel()
         self.DataLabelZ=QLabel()
         
+        self.disableAcquisition()
             
         self.Search.signalport.portname.connect(self.SetPort)
         
@@ -72,8 +73,20 @@ class MainWindow(QMainWindow):
     def SetPort(self,portname):
         
         self.DataStream.setPortW(portname)
+        self.enableAcquisition()
+
 
         print("settedport:"+str(self.DataStream.serialport))
+
+    def disableAcquisition(self):
+        self.DataStream.startAcq.setDisabled(True)
+        self.DataStream.stopAcq.setDisabled(True)
+        self.DataStream.ShowData.setDisabled(True)
+
+    def enableAcquisition(self):
+        self.DataStream.startAcq.setDisabled(False)
+        self.DataStream.stopAcq.setDisabled(False)
+        self.DataStream.ShowData.setDisabled(False)
 
     def initGUI(self):
         Elements=QWidget()

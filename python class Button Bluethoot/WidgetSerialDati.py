@@ -76,7 +76,12 @@ class WidgetDati(QWidget):
     
     def StartAcquisition(self):
             self.FlagStart=True
+            #restore serial
             self.Dati=DatiSerial(self.serialport,'Ready')
+            self.Dati.signals.service_string.connect(self.SignalThreadStr)
+            self.Dati.signals.dati.connect(self.SignalDati)
+        
+            
             time.sleep(0.05)
             self.StartThread()
             self.Dati.is_killed=False

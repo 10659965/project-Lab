@@ -50,7 +50,7 @@ class BT_search(QWidget):
         #self.setMinimumSize(self.MainWindowSize[0],self.MainWindowSize[1])
         self.butt_bt=QPushButton("Search for device")
         self.butt_bt.setMinimumSize(100,100)
-        self.butt_bt.setMaximumSize(300,150)
+        #self.butt_bt.setMaximumSize(300,150)
         self.stato=0
 
         self.label_status=QLabel()

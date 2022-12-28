@@ -62,10 +62,10 @@ for i in range(0, l):
     if a[i] >= thr:
         count += 1
 steps = str(count /2)
-
-print("number of peaks:", count)
-print("number of steps:", steps)   
 '''
+#print("number of peaks:", count)
+#print("number of steps:", steps)   
+
 #classe lista
 class List_Acquisitions(QWidget):
     def __init__(self):
@@ -74,11 +74,11 @@ class List_Acquisitions(QWidget):
 
         self.setLayout(layout)
         self.listwidget = QListWidget()
-        self.listwidget.insertItem(0, "Red")
-        self.listwidget.insertItem(1, "Orange")
-        self.listwidget.insertItem(2, "Blue")
-        self.listwidget.insertItem(3, "White")
-        self.listwidget.insertItem(4, "Green")
+        self.listwidget.insertItem(0, "Excel1_example")
+        self.listwidget.insertItem(1, "Excel2_example")
+        self.listwidget.insertItem(2, "Excel3_example")
+        self.listwidget.insertItem(3, "Excel4_example")
+        self.listwidget.insertItem(4, "Excel5_example")
         # self.listwidget.setMaximumSize(50, 50)
         # self.listwidget.setMaximumSize(100, 100)
         self.listwidget.clicked.connect(self.clicked)
@@ -98,21 +98,32 @@ class MainW(QMainWindow):
         self.Z=[]
         self.time=[]
         self.portname=''
+        self.totalsignal=[]
+        
         #self.FlagFirstAbort=0
         
         
         #####Graph#####
         pen = pg.mkPen(color=(255, 0, 0))
         self.graphWidget = pg.PlotWidget()
+        self.graphWidget
         self.graphWidget = PlotWidget(pen=pen)
         self.graphWidget.showGrid(x=True, y=True)
         self.graphWidget.setBackground('w')
         self.graphWidget.setTitle("Acceleration measurement")
-        # Add axis labels
+        #Graph: Add axis labels
         styles = {'color': 'k', 'font-size': '15px'}
         self.graphWidget.setLabel('left', 'Acceleration [g]', **styles)
         self.graphWidget.setLabel('bottom', 'Time [sec]', **styles)
         self.graphWidget.addLegend()
+
+        ####steps labels
+        self.label_steps = QLabel()
+        self.label_steps_text = QLabel('The number of Steps is:', self)
+        self.label_steps.resize(170, 40)
+        self.label_steps_text.resize(50, 40)
+        
+
 
         ####timer####
         self.timerstring=QLabel("Time: ")
@@ -126,6 +137,8 @@ class MainW(QMainWindow):
         self.timer.timeout.connect(self.showTimer)
         self.start = False
         self.count = 0
+        self.firststart=True
+
         
 
         ####excel###
@@ -187,6 +200,7 @@ class MainW(QMainWindow):
             self.ThreadDati=QThreadPool()
 
             self.ThreadDati.start(self.Dati)
+            
             self.Dati.is_killed=False
             print("iskilled:"+str(self.Dati.is_killed))
             self.startAcq.setDisabled(True)
@@ -201,6 +215,7 @@ class MainW(QMainWindow):
         #print(self.Dati.PortName)
         print("iskilled:"+str(self.Dati.is_killed))
         self.startAcq.setDisabled(False)
+        self.resetTimer()
         #self.FlagFirstAbort=1
         
         
@@ -214,10 +229,14 @@ class MainW(QMainWindow):
         self.Z=z
         
         
+        
         if len(self.X) and len(self.Y) and len(self.Z):
             l=len(self.Z)
 
         self.draw(self.X,self.Y,self.Z)
+        if self.firststart:    
+            self.startTimer()
+            self.firststart=False
 
         print("x:{}\r\ny:{}\r\nz:{}".format(self.X[l-1],self.Y[l-1],self.Z[l-1]))
 
@@ -230,23 +249,38 @@ class MainW(QMainWindow):
         ay_sq = np.square(Y)
         az_sq = np.square(Z)
         acc = np.sqrt(ax_sq + ay_sq + az_sq)
+        self.totalsignal=acc
 
         l=len(acc)
-        lenght=l-1
-        time=[0,lenght-1,1]
+        length=l-1
+        l = np.arange(0, length+1, 1)
         
-        self.graphWidget.plot(time,acc)
+        self.graphWidget.plot(l,acc)
+        steps=self.ThresholdCount(acc,l)
+        self.label_steps.setText(steps)
+
+
+    def ThresholdCount(self,a,l):
+        thr = 300 #soglia settata basandomi sul grafico. i picchi inizio passo e fine passo raggiungono 8g.
+        count = 0
+        for i in l:
+            if a[i] >= thr:
+                count += 1
+        steps = str(int(count /4))
+        return steps
+    
     #SHOW DATAS
     def ShowVectData(self):
 
         ####excel####
-        self.ExcelSave()
+        self.ExcelSave(self.X,self.Y,self.Z,self.totalsignal)
         
         print(self.X)
         print(len(self.X))
+    
     #EXCEL FUNCTION 
-    def ExcelSave(self,X,Y,Z):
-        d={'X':X,'Y':Y,'Z':Z}
+    def ExcelSave(self,X,Y,Z,acc):
+        d={'X':X,'Y':Y,'Z':Z,'total signal':acc}
         df=pd.DataFrame(data=d)
         
         df.to_excel("ouput_{}.xlsx".format(self.n_ex))
@@ -284,9 +318,10 @@ class MainW(QMainWindow):
 
     def resetTimer(self):
         self.count = 0
-        text_timer = str(self.count) + ' s'
-        self.timelabel.setText(text_timer)
+        #text_timer = str(self.count) + ' s'
+        #self.timelabel.setText(text_timer)
         self.start = False
+        self.firststart=True
         #self.start_btn.setDisabled(False)
         
 
@@ -303,9 +338,15 @@ class MainW(QMainWindow):
         AcqButtonlayV.addLayout(AcqButtonlayH)
         AcqButtonlayV.addWidget(self.ShowData)
 
-        #widgetlabels
+        #layoulabels steps
+        layoutlabel=QHBoxLayout()
+        layoutlabel.addWidget(self.label_steps_text)
+        layoutlabel.addWidget(self.label_steps)
 
-
+        #layoutlabels timer
+        layoutlabel_timer=QHBoxLayout()
+        layoutlabel_timer.addWidget(self.timerstring)
+        layoutlabel_timer.addWidget(self.timelabel)
 
         #sx tab main window
         sx_lay_w=QWidget()
@@ -314,6 +355,8 @@ class MainW(QMainWindow):
         tabAcquisition.layout=QVBoxLayout()
         tabAcquisition.layout.addLayout(AcqButtonlayV)
         tabAcquisition.layout.addWidget(self.searchWdiget)
+        tabAcquisition.layout.addLayout(layoutlabel)
+        tabAcquisition.layout.addLayout(layoutlabel_timer)
 
         tabAcquisition.setLayout(tabAcquisition.layout)
 
@@ -326,8 +369,13 @@ class MainW(QMainWindow):
         tabsx=QTabWidget()
         tabsx.addTab(tabAcquisition,'Acquisition')
         tabsx.addTab(tablist,'Excel files')
+        tabsx.setMaximumWidth(400)
+        tabsx.resize(250,600)
+        '''
         tabsx.setMaximumSize(250,600)
+        
         tabsx.setMinimumSize(250, 250)
+        '''
 
         sx_lay_w.layout=QVBoxLayout()
         sx_lay_w.layout.addWidget(tabsx)

@@ -70,6 +70,9 @@ class DatiSerial(QRunnable):
 
     def Abort(self):
         self.is_killed=True
+        self.serialPort.write('b'.encode('utf-8'))
+        #self.serialPort.close()
+        self.FlagConnection=False
         time.sleep(0.01)
 
      
@@ -94,6 +97,7 @@ class DatiSerial(QRunnable):
                     self.serialPort = serial.Serial(port = self.PortName, baudrate=115200,bytesize=8, timeout=None, stopbits=serial.STOPBITS_ONE)
                     self.checkStringInit()
                     self.FlagConnection=True
+                
 
                 #self.signals.service_string.emit("connection estabilished")
                 if(self.serialPort.is_open):
@@ -143,7 +147,7 @@ class DatiSerial(QRunnable):
                     
                         
 
-                    time.sleep(0.5)
+                    time.sleep(0.05)
                     self.run()
                     
                         
@@ -153,13 +157,13 @@ class DatiSerial(QRunnable):
         except WorkerKilled:
             self.signals.service_string.emit("killed")
             self.serialPort.close()
-            time.sleep(0.5)
+            time.sleep(0.05)
 
     def checkStringInit(self):
         stringInit=str(self.serialPort.read(7))
         self.signals.service_string.emit(stringInit)
         if self.chcompare in stringInit:
-            self.serialPort.write(1)
+            self.serialPort.write('a'.encode('utf-8'))
             self.signals.service_string.emit("WROTE") 
              
                 
